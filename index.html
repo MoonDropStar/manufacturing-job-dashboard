@@ -6,7 +6,7 @@
 <title>Manufacturing Job Status Dashboard</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#F0F2F5;color:#1A2332;font-size:14px;line-height:1.5;min-height:100vh;}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#F0F2F5;color:#1A2332;font-size:14px;line-height:1.5;min-height:100vh;overflow-x:hidden;max-width:100vw;}
 
 /* ── SETUP PANEL ── */
 #setupPanel{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:2rem;gap:1.5rem;}
@@ -97,7 +97,8 @@ select.hsel{font-size:12px;height:32px;padding:0 8px;border:1px solid #CBD5E1;bo
 .btn-link:hover{text-decoration:underline;}
 
 /* ── TABLE ── */
-.tc{background:#fff;border-radius:10px;border:1px solid #E2E8F0;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.tc{background:#fff;border-radius:10px;border:1px solid #E2E8F0;overflow:hidden;}
+.tc-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%;}
 .jt{width:100%;min-width:900px;border-collapse:collapse;font-size:14px;}
 .jt thead th{background:#F8FAFC;padding:10px 13px;text-align:center;font-size:12px;font-weight:600;color:#64748B;border-bottom:1px solid #E2E8F0;white-space:nowrap;cursor:pointer;user-select:none;letter-spacing:.03em;}
 .jt thead th:hover{color:#1A2332;}
@@ -215,6 +216,7 @@ select.hsel{font-size:12px;height:32px;padding:0 8px;border:1px solid #CBD5E1;bo
 
   <!-- job table -->
   <div class="tc">
+    <div class="tc-scroll">
     <table class="jt">
       <thead><tr>
         <th style="width:95px;"  data-col="id"        onclick="sortBy('id')">Job ID</th>
@@ -232,6 +234,7 @@ select.hsel{font-size:12px;height:32px;padding:0 8px;border:1px solid #CBD5E1;bo
       </tr></thead>
       <tbody id="jbd"></tbody>
     </table>
+    </div>
     <div class="tf" id="jtf">No data loaded</div>
   </div>
 

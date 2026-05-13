@@ -360,6 +360,7 @@ function cdBadge(n) {
   return                  `<span class="cd-badge cd-ok">${n}d left</span>`;
 }
 const fd   = d => { if (!d) return ''; const p = d.split('-'); return p.length===3 ? `${p[2]}/${p[1]}/${p[0].slice(2)}` : d; };
+const fmtWeight = w => { if (!w && w !== 0) return '—'; const n = parseFloat(String(w).replace(/,/g, '').replace(/[^\d.-]/g, '')); return isNaN(n) ? '—' : n.toFixed(2); };
 const scls = s => ({Open:'bs','In Progress':'bw','On Hold':'bg',Completed:'bv',Overdue:'br'}[s]||'bg');
 const pcls = p => ({Critical:'br',High:'bw',Medium:'bs',Low:'bg'}[p]||'bg');
 const tcls = t => ({C:'bt-c',D:'bt-d',TBD:'bt-tbd'}[t]||'bt-tbd');
@@ -436,7 +437,7 @@ function render() {
     <td style="color:#64748B;">${j.line}</td>
     <td style="color:#1A2332;">${j.operator}</td>
     <td><span class="bd ${tcls(j.type)}" title="${tlbl(j.type)}">${j.type||'—'}</span></td>
-    <td style="color:#1A2332;">${isNaN(parseFloat(j.weight))?j.weight||'—':parseFloat(j.weight).toFixed(2)}</td>
+    <td style="color:#1A2332;">${fmtWeight(j.weight)}</td>
     <td><span class="bd ${pcls(j.priority)}">${j.priority}</span></td>
     <td><span class="bd ${scls(j.status)}">${j.status}</span></td>
     <td style="color:${j.status==='Overdue'?'#DC2626':'#1A2332'};">${fd(j.due)}</td>

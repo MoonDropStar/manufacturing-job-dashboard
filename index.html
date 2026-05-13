@@ -131,34 +131,32 @@ select.hsel{font-size:12px;height:32px;padding:0 8px;border:1px solid #CBD5E1;bo
 </head>
 <body>
 
-<!-- ═══ SETUP PANEL ═══ -->
-<div id="setupPanel">
+<!-- ═══ LOADING SCREEN ═══ -->
+<div id="loadingScreen" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:1rem;">
+  <div style="font-size:13px;font-weight:600;color:#64748B;letter-spacing:.08em;text-transform:uppercase;">Manufacturing Dashboard</div>
+  <div style="font-size:22px;font-weight:600;color:#1A2332;">Loading job data…</div>
+  <div style="width:40px;height:40px;border:3px solid #E2E8F0;border-top-color:#D97706;border-radius:50%;animation:spin .8s linear infinite;"></div>
+  <div id="loadingMsg" style="font-size:12px;color:#94A3B8;">Connecting to GitHub…</div>
+</div>
+<style>@keyframes spin{to{transform:rotate(360deg);}}</style>
+
+<!-- ═══ SETUP PANEL (fallback if GitHub load fails) ═══ -->
+<div id="setupPanel" style="display:none;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:2rem;gap:1.5rem;">
   <div class="sp-badge">Manufacturing Dashboard</div>
   <div class="sp-title">Job Status &amp; Ticketing</div>
-
   <div class="sp-card">
-    <h3>Connect your Excel export</h3>
-    <p>Select your <strong>JobStatusExport.csv</strong> file once. The dashboard will remember it and automatically refresh every time your VBA macro runs a new export.</p>
-    <button class="btn-primary" id="btnPick" onclick="pickFile()">Select CSV file &amp; connect</button>
-    <br><br>
-    <div class="sp-divider">or drag &amp; drop</div><br>
+    <h3>⚠️ Could not load data automatically</h3>
+    <p id="setupErrDetail" style="color:#DC2626;font-size:12px;margin-bottom:1rem;"></p>
+    <p style="font-size:12px;color:#64748B;margin-bottom:1.25rem;">You can retry the GitHub connection or load the CSV manually as a fallback.</p>
+    <button class="btn-primary" onclick="retryGitHub()" style="margin-bottom:.75rem;">Retry GitHub connection</button>
+    <div class="sp-divider">or load manually</div><br>
     <div class="drop-zone" id="dropZone">
       <div class="drop-zone-icon">📂</div>
       <div class="drop-zone-text">Drag your <strong>JobStatusExport.csv</strong> here<br>or <strong>click to browse</strong></div>
       <input type="file" accept=".csv" onchange="loadFallback(this.files[0])">
     </div>
   </div>
-
   <div id="setupError"></div>
-  <div class="warn-box" id="compatWarn">
-    Your browser doesn't support auto-watching (use Chrome or Edge for that). You can still load the CSV manually — just re-select it after each export.
-  </div>
-
-  <div class="steps">
-    <div class="step"><div class="step-n">Step 1</div><div class="step-t">Run VBA macro</div><div class="step-d">Click Export in Excel — CSV saves to your Desktop</div></div>
-    <div class="step"><div class="step-n">Step 2</div><div class="step-t">Select file once</div><div class="step-d">Click above and pick JobStatusExport.csv</div></div>
-    <div class="step"><div class="step-n">Step 3</div><div class="step-t">Auto-refreshes</div><div class="step-d">Dashboard watches the file and updates every 60 seconds</div></div>
-  </div>
 </div>
 
 <!-- ═══ DASHBOARD ═══ -->
@@ -522,19 +520,39 @@ function showErr(msg){const e=document.getElementById('setupError');e.textConten
 // Fetches directly from raw.githubusercontent.com to bypass
 // GitHub Pages CDN cache — always gets the latest uploaded CSV.
 const GITHUB_CSV_URL = 'https://raw.githubusercontent.com/MoonDropStar/corten-job-dashboard/main/data/JobStatusExport.csv';
-let lastGitHubLoad = 0;
+
+function showLoading(msg){
+  document.getElementById('loadingScreen').style.display='flex';
+  document.getElementById('setupPanel').style.display='none';
+  document.getElementById('dashboard').style.display='none';
+  if(msg) document.getElementById('loadingMsg').textContent=msg;
+}
+
+function showFallback(errMsg){
+  document.getElementById('loadingScreen').style.display='none';
+  document.getElementById('dashboard').style.display='none';
+  const sp=document.getElementById('setupPanel');
+  sp.style.display='flex';
+  document.getElementById('setupErrDetail').textContent=errMsg;
+}
+
+async function retryGitHub(){
+  showLoading('Retrying GitHub connection…');
+  await loadGitHubCSV();
+}
 
 async function loadGitHubCSV(){
   try{
+    document.getElementById('loadingMsg').textContent='Fetching latest job data…';
+
     const response = await fetch(GITHUB_CSV_URL + '?t=' + Date.now());
-    if(!response.ok) throw new Error('HTTP ' + response.status + ' — unable to load CSV');
+    if(!response.ok) throw new Error('GitHub returned HTTP ' + response.status);
 
     const text = await response.text();
     const jobs = parseCSV(text);
-    if(!jobs.length) throw new Error('No jobs found in CSV');
+    if(!jobs.length) throw new Error('CSV loaded but no jobs found — check VBA export ran correctly');
 
     JOBS = jobs;
-    lastGitHubLoad = Date.now();
 
     const now = new Date();
     document.getElementById('dhMeta').textContent =
@@ -542,20 +560,30 @@ async function loadGitHubCSV(){
       now.toLocaleDateString('en-GB',{day:'numeric',month:'short'}) + ' at ' +
       now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
 
-    if(document.getElementById('dashboard').style.display === 'none'){
+    const dashVisible = document.getElementById('dashboard').style.display !== 'none';
+
+    if(!dashVisible){
+      // First load — hide loading screen and show dashboard
+      document.getElementById('loadingScreen').style.display='none';
       showDash();
     } else {
+      // Subsequent refresh — just update data in place
       updateDash();
       toast('Refreshed — ' + jobs.length + ' jobs loaded');
     }
 
-    setPill('live','Live — GitHub CSV connected');
+    setPill('live','Live — auto-refresh every 60s');
 
   }catch(err){
     console.error('GitHub CSV load error:', err);
-    setPill('idle','CSV error — ' + err.message.substring(0,40));
-    if(document.getElementById('dashboard').style.display === 'none'){
-      showErr(err.message);
+    const dashVisible = document.getElementById('dashboard').style.display !== 'none';
+    if(!dashVisible){
+      // Failed on initial load — show fallback panel
+      showFallback(err.message);
+    } else {
+      // Failed on background refresh — show toast, keep existing data
+      setPill('idle','Refresh failed — showing last loaded data');
+      toast('Auto-refresh failed: ' + err.message.substring(0,50));
     }
   }
 }
@@ -563,7 +591,7 @@ async function loadGitHubCSV(){
 // ── GitHub auto-refresh timer ─────────────────────────────────
 setInterval(loadGitHubCSV, 60000);
 
-// ── Startup ───────────────────────────────────────────────────
+// ── Startup — load from GitHub immediately ────────────────────
 loadGitHubCSV();
 </script>
 </body>

@@ -8,41 +8,33 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#F0F2F5;color:#1A2332;font-size:14px;line-height:1.5;min-height:100vh;overflow-x:hidden;max-width:100vw;}
 
-/* ── SETUP PANEL ── */
-#setupPanel{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:2rem;gap:1.5rem;}
-.sp-badge{font-size:11px;font-weight:600;color:#64748B;letter-spacing:.08em;text-transform:uppercase;}
-.sp-title{font-size:26px;font-weight:600;color:#1A2332;text-align:center;}
-.sp-card{background:#fff;border:1px solid #E2E8F0;border-radius:14px;padding:2rem;width:100%;max-width:440px;text-align:center;}
-.sp-card h3{font-size:14px;font-weight:600;color:#1A2332;margin-bottom:.5rem;}
-.sp-card p{font-size:12px;color:#64748B;margin-bottom:1.25rem;line-height:1.7;}
-.btn-primary{background:#D97706;color:#fff;border:none;border-radius:8px;padding:11px 24px;font-size:14px;font-weight:600;cursor:pointer;width:100%;transition:background .15s;}
+/* ── SCREENS — all hidden by default, shown via JS ── */
+#loadingScreen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:1rem;}
+#errorPanel{display:none;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:2rem;gap:1.5rem;}
+#dashboard{display:none;padding:1.25rem 1.5rem;max-width:1400px;margin:0 auto;}
+
+@keyframes spin{to{transform:rotate(360deg);}}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+.spinner{width:40px;height:40px;border:3px solid #E2E8F0;border-top-color:#D97706;border-radius:50%;animation:spin .8s linear infinite;}
+
+/* error panel */
+.ep-card{background:#fff;border:1px solid #E2E8F0;border-radius:14px;padding:2rem;width:100%;max-width:460px;text-align:center;}
+.ep-card h3{font-size:15px;font-weight:600;color:#DC2626;margin-bottom:.75rem;}
+.ep-err{font-size:12px;color:#64748B;background:#FEF2F2;border:1px solid #FECACA;border-radius:8px;padding:8px 12px;margin-bottom:1.25rem;text-align:left;line-height:1.6;}
+.ep-card p{font-size:12px;color:#64748B;margin-bottom:1.25rem;line-height:1.7;}
+.btn-primary{background:#D97706;color:#fff;border:none;border-radius:8px;padding:11px 24px;font-size:14px;font-weight:600;cursor:pointer;width:100%;transition:background .15s;margin-bottom:.75rem;}
 .btn-primary:hover{background:#B45309;}
-.btn-secondary{background:#fff;color:#475569;border:1px solid #CBD5E1;border-radius:8px;padding:10px 22px;font-size:13px;font-weight:500;cursor:pointer;width:100%;transition:background .15s;}
-.btn-secondary:hover{background:#F8FAFC;}
-.sp-divider{font-size:11px;color:#94A3B8;width:100%;text-align:center;position:relative;}
+.sp-divider{font-size:11px;color:#94A3B8;text-align:center;position:relative;margin:.75rem 0;}
 .sp-divider::before,.sp-divider::after{content:'';position:absolute;top:50%;width:42%;height:1px;background:#E2E8F0;}
 .sp-divider::before{left:0;}.sp-divider::after{right:0;}
-.fallback-wrap{position:relative;width:100%;}
-.fallback-wrap input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
-.steps{display:flex;gap:1rem;max-width:540px;flex-wrap:wrap;justify-content:center;}
-.step{background:#fff;border:1px solid #E2E8F0;border-radius:10px;padding:.85rem 1rem;flex:1;min-width:140px;}
-.step-n{font-size:10px;font-weight:700;color:#D97706;margin-bottom:3px;letter-spacing:.06em;}
-.step-t{font-size:12px;font-weight:600;color:#1A2332;margin-bottom:2px;}
-.step-d{font-size:11px;color:#64748B;line-height:1.5;}
-.warn-box{background:#FEF3C7;border:1px solid #FDE68A;border-radius:8px;padding:.75rem 1rem;font-size:12px;color:#92400E;max-width:440px;text-align:center;display:none;}
-/* ── Drag & Drop Zone ── */
-.drop-zone{border:2px dashed #CBD5E1;border-radius:12px;padding:1.5rem 1rem;margin-top:1.25rem;cursor:pointer;transition:border-color .2s,background .2s;position:relative;}
+.drop-zone{border:2px dashed #CBD5E1;border-radius:12px;padding:1.5rem 1rem;cursor:pointer;transition:border-color .2s,background .2s;position:relative;}
 .drop-zone:hover,.drop-zone.drag-over{border-color:#D97706;background:#FFFBF0;}
 .drop-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
 .drop-zone-icon{font-size:28px;margin-bottom:.4rem;}
 .drop-zone-text{font-size:13px;color:#64748B;line-height:1.6;}
 .drop-zone-text strong{color:#D97706;}
-#setupError{color:#DC2626;font-size:13px;background:#FEF2F2;border:1px solid #FECACA;border-radius:8px;padding:8px 14px;max-width:440px;display:none;}
 
-/* ── DASHBOARD ── */
-#dashboard{display:none;padding:1.25rem 1.5rem;max-width:1400px;margin:0 auto;}
-
-/* header */
+/* dashboard header */
 .dh{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.25rem;padding:.85rem 1.25rem;background:#fff;border:1px solid #E2E8F0;border-radius:10px;flex-wrap:wrap;}
 .dh-title{font-size:16px;font-weight:600;}
 .dh-meta{font-size:11px;color:#64748B;margin-top:2px;}
@@ -53,7 +45,6 @@ body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#F0F2F
 .pill.live::before,.pill.idle::before{content:'';width:7px;height:7px;border-radius:50%;flex-shrink:0;}
 .pill.live::before{background:#22C55E;animation:blink 2s infinite;}
 .pill.idle::before{background:#D97706;}
-@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
 .cdown{font-size:11px;color:#94A3B8;white-space:nowrap;}
 .btn-h{background:#fff;border:1px solid #CBD5E1;border-radius:7px;padding:6px 13px;font-size:12px;cursor:pointer;color:#475569;white-space:nowrap;}
 .btn-h:hover{background:#F8FAFC;}
@@ -68,27 +59,21 @@ select.hsel{font-size:12px;height:32px;padding:0 8px;border:1px solid #CBD5E1;bo
 .kv{font-size:24px;font-weight:700;line-height:1.2;}
 .kd{font-size:10px;color:#94A3B8;margin-top:2px;}
 
-/* ── FILTER PANEL ── */
+/* filter panel */
 .fp{background:#fff;border:1px solid #E2E8F0;border-radius:10px;padding:.85rem 1.1rem;margin-bottom:.75rem;}
 .fp-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .fp-row+.fp-row{margin-top:.6rem;padding-top:.6rem;border-top:1px solid #F1F5F9;}
 .fp-lbl{font-size:11px;font-weight:600;color:#64748B;white-space:nowrap;min-width:80px;}
-
-/* checkbox pills */
 .chk-pill{display:inline-flex;align-items:center;gap:5px;cursor:pointer;padding:5px 12px;border-radius:20px;border:1.5px solid;font-size:12px;font-weight:600;transition:all .15s;user-select:none;line-height:1.4;}
 .chk-pill input[type=checkbox]{display:none;}
 .chk-pill::before{content:'✓';font-size:10px;font-weight:700;}
-/* checked colours */
 .chk-open  {background:#EFF6FF;color:#1D4ED8;border-color:#BFDBFE;}
 .chk-inprog{background:#FFFBEB;color:#92400E;border-color:#FDE68A;}
 .chk-hold  {background:#F8FAFC;color:#475569;border-color:#CBD5E1;}
 .chk-done  {background:#F0FDF4;color:#166534;border-color:#BBF7D0;}
 .chk-over  {background:#FEF2F2;color:#991B1B;border-color:#FECACA;}
-/* unchecked — grey override using :has() */
 .chk-pill:has(input:not(:checked)){background:#F1F5F9 !important;color:#94A3B8 !important;border-color:#E2E8F0 !important;}
 .chk-pill:has(input:not(:checked))::before{content:'';width:10px;}
-
-/* dropdown + text filters */
 .fp-row select,.fp-row input[type=text]{font-size:13px;height:34px;padding:0 10px;border:1px solid #CBD5E1;border-radius:7px;background:#fff;color:#1A2332;outline:none;}
 .fp-row select:focus,.fp-row input:focus{border-color:#D97706;}
 .btn-g{background:#fff;border:1px solid #CBD5E1;border-radius:7px;padding:0 14px;height:34px;font-size:12px;cursor:pointer;color:#475569;}
@@ -96,7 +81,7 @@ select.hsel{font-size:12px;height:32px;padding:0 8px;border:1px solid #CBD5E1;bo
 .btn-link{background:none;border:none;font-size:12px;color:#D97706;cursor:pointer;padding:0 4px;font-weight:600;}
 .btn-link:hover{text-decoration:underline;}
 
-/* ── TABLE ── */
+/* table */
 .tc{background:#fff;border-radius:10px;border:1px solid #E2E8F0;overflow:hidden;}
 .tc-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%;}
 .jt{width:100%;min-width:900px;border-collapse:collapse;font-size:14px;}
@@ -112,17 +97,13 @@ select.hsel{font-size:12px;height:32px;padding:0 8px;border:1px solid #CBD5E1;bo
 .bg{background:#F8FAFC;color:#64748B;border:1px solid #E2E8F0;}
 .bv{background:#F0FDF4;color:#166534;}.br{background:#FEF2F2;color:#991B1B;}
 .cd-badge{display:inline-block;padding:3px 10px;border-radius:5px;font-size:12px;font-weight:700;line-height:1.6;white-space:nowrap;}
-.cd-ok  {background:#F0FDF4;color:#166534;}
-.cd-warn{background:#FFFBEB;color:#92400E;}
-.cd-due {background:#FFF7ED;color:#C2410C;}
-.cd-over{background:#FEF2F2;color:#991B1B;}
+.cd-ok{background:#F0FDF4;color:#166534;}.cd-warn{background:#FFFBEB;color:#92400E;}
+.cd-due{background:#FFF7ED;color:#C2410C;}.cd-over{background:#FEF2F2;color:#991B1B;}
 .cd-none{background:#F8FAFC;color:#94A3B8;border:1px solid #E2E8F0;}
 .tf{padding:10px 13px;font-size:12px;color:#64748B;border-top:1px solid #E2E8F0;background:#F8FAFC;}
-/* ── Collection / Delivery / TBD badges ── */
-.bt-c  {background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE;}
-.bt-d  {background:#F0FDF4;color:#166534;border:1px solid #BBF7D0;}
+.bt-c{background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE;}
+.bt-d{background:#F0FDF4;color:#166534;border:1px solid #BBF7D0;}
 .bt-tbd{background:#F8FAFC;color:#475569;border:1px solid #CBD5E1;}
-
 .toast{position:fixed;bottom:1.5rem;right:1.5rem;background:#1A2332;color:#fff;padding:10px 18px;border-radius:9px;font-size:13px;font-weight:500;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;z-index:999;}
 .toast.show{opacity:1;transform:translateY(0);}
 @media(max-width:900px){.kr{grid-template-columns:repeat(3,1fr);}}
@@ -131,38 +112,32 @@ select.hsel{font-size:12px;height:32px;padding:0 8px;border:1px solid #CBD5E1;bo
 </head>
 <body>
 
-<!-- ═══ LOADING SCREEN ═══ -->
-<div id="loadingScreen" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:1rem;">
+<!-- Shown immediately on page open -->
+<div id="loadingScreen">
   <div style="font-size:13px;font-weight:600;color:#64748B;letter-spacing:.08em;text-transform:uppercase;">Manufacturing Dashboard</div>
   <div style="font-size:22px;font-weight:600;color:#1A2332;">Loading job data…</div>
-  <div style="width:40px;height:40px;border:3px solid #E2E8F0;border-top-color:#D97706;border-radius:50%;animation:spin .8s linear infinite;"></div>
+  <div class="spinner"></div>
   <div id="loadingMsg" style="font-size:12px;color:#94A3B8;">Connecting to GitHub…</div>
 </div>
-<style>@keyframes spin{to{transform:rotate(360deg);}}</style>
 
-<!-- ═══ SETUP PANEL (fallback if GitHub load fails) ═══ -->
-<div id="setupPanel" style="display:none;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:2rem;gap:1.5rem;">
-  <div class="sp-badge">Manufacturing Dashboard</div>
-  <div class="sp-title">Job Status &amp; Ticketing</div>
-  <div class="sp-card">
-    <h3>⚠️ Could not load data automatically</h3>
-    <p id="setupErrDetail" style="color:#DC2626;font-size:12px;margin-bottom:1rem;"></p>
-    <p style="font-size:12px;color:#64748B;margin-bottom:1.25rem;">You can retry the GitHub connection or load the CSV manually as a fallback.</p>
-    <button class="btn-primary" onclick="retryGitHub()" style="margin-bottom:.75rem;">Retry GitHub connection</button>
-    <div class="sp-divider">or load manually</div><br>
-    <div class="drop-zone" id="dropZone">
+<!-- Shown only if CSV fetch fails -->
+<div id="errorPanel">
+  <div class="ep-card">
+    <h3>⚠️ Could not load job data</h3>
+    <div class="ep-err" id="epErrMsg"></div>
+    <p>Check your internet connection and try again. You can also load the CSV manually as a fallback.</p>
+    <button class="btn-primary" onclick="retryGitHub()">🔄 Retry connection</button>
+    <div class="sp-divider">or load manually</div>
+    <div class="drop-zone">
       <div class="drop-zone-icon">📂</div>
-      <div class="drop-zone-text">Drag your <strong>JobStatusExport.csv</strong> here<br>or <strong>click to browse</strong></div>
+      <div class="drop-zone-text">Drag <strong>JobStatusExport.csv</strong> here<br>or <strong>click to browse</strong></div>
       <input type="file" accept=".csv" onchange="loadFallback(this.files[0])">
     </div>
   </div>
-  <div id="setupError"></div>
 </div>
 
-<!-- ═══ DASHBOARD ═══ -->
+<!-- Shown after successful load -->
 <div id="dashboard">
-
-  <!-- header -->
   <div class="dh">
     <div>
       <div class="dh-title">Manufacturing Job Status</div>
@@ -179,29 +154,22 @@ select.hsel{font-size:12px;height:32px;padding:0 8px;border:1px solid #CBD5E1;bo
         <option value="0">Manual only</option>
       </select>
       <button class="btn-h amber" onclick="manualRefresh()">Refresh now</button>
-      <button class="btn-h" onclick="changeFile()">Change file</button>
     </div>
   </div>
 
-  <!-- kpi cards -->
   <div class="kr" id="kpr"></div>
 
-  <!-- filter panel -->
   <div class="fp">
-
-    <!-- row 1: status checkboxes -->
     <div class="fp-row">
       <span class="fp-lbl">Show status:</span>
-      <label class="chk-pill chk-open"   title="Open jobs"><input type="checkbox" value="Open"        checked onchange="render()"> Open</label>
-      <label class="chk-pill chk-inprog" title="In Progress"><input type="checkbox" value="In Progress" checked onchange="render()"> In Progress</label>
-      <label class="chk-pill chk-hold"   title="On Hold"><input type="checkbox" value="On Hold"             onchange="render()"> On Hold</label>
-      <label class="chk-pill chk-done"   title="Completed"><input type="checkbox" value="Completed"         onchange="render()"> Completed</label>
-      <label class="chk-pill chk-over"   title="Overdue"><input type="checkbox" value="Overdue"      checked onchange="render()"> Overdue</label>
+      <label class="chk-pill chk-open"><input type="checkbox" value="Open" checked onchange="render()"> Open</label>
+      <label class="chk-pill chk-inprog"><input type="checkbox" value="In Progress" checked onchange="render()"> In Progress</label>
+      <label class="chk-pill chk-hold"><input type="checkbox" value="On Hold" onchange="render()"> On Hold</label>
+      <label class="chk-pill chk-done"><input type="checkbox" value="Completed" onchange="render()"> Completed</label>
+      <label class="chk-pill chk-over"><input type="checkbox" value="Overdue" checked onchange="render()"> Overdue</label>
       <button class="btn-link" onclick="setAllStatus(true)">Select all</button>
       <button class="btn-link" style="color:#94A3B8;" onclick="setAllStatus(false)">Clear all</button>
     </div>
-
-    <!-- row 2: search + dropdowns -->
     <div class="fp-row">
       <span class="fp-lbl">Search &amp; filter:</span>
       <input type="text" id="fsrc" placeholder="Job ID or description…" style="width:210px;" oninput="render()">
@@ -209,280 +177,259 @@ select.hsel{font-size:12px;height:32px;padding:0 8px;border:1px solid #CBD5E1;bo
       <select id="fln" onchange="render()"><option value="">All lines</option></select>
       <button class="btn-g" onclick="resetFilters()">Reset all</button>
     </div>
-
   </div>
 
-  <!-- job table -->
   <div class="tc">
     <div class="tc-scroll">
-    <table class="jt">
-      <thead><tr>
-        <th style="width:95px;"  data-col="id"        onclick="sortBy('id')">Job ID</th>
-        <th style="width:130px;" data-col="colL"       onclick="sortBy('colL')" id="thColL">Client/Company</th>
-        <th style="width:210px;" data-col="desc"       onclick="sortBy('desc')">Description</th>
-        <th style="width:82px;"  data-col="line"       onclick="sortBy('line')">Line</th>
-        <th style="width:110px;" data-col="operator"   onclick="sortBy('operator')">Operator</th>
-        <th style="width:100px;" data-col="type"        onclick="sortBy('type')">Transport</th>
-        <th style="width:100px;" data-col="weight"      onclick="sortBy('weight')">Weight (kg)</th>
-        <th style="width:80px;"  data-col="priority"   onclick="sortBy('priority')">Priority</th>
-        <th style="width:96px;"  data-col="status"     onclick="sortBy('status')">Status</th>
-        <th style="width:84px;"  data-col="due"        onclick="sortBy('due')">Due date</th>
-        <th style="width:110px;" data-col="countdown"  onclick="sortBy('countdown')">Countdown</th>
-        <th style="width:86px;"  data-col="raised"     onclick="sortBy('raised')">Raised</th>
-      </tr></thead>
-      <tbody id="jbd"></tbody>
-    </table>
+      <table class="jt">
+        <thead><tr>
+          <th style="width:95px;"  data-col="id"       onclick="sortBy('id')">Job ID</th>
+          <th style="width:130px;" data-col="colL"      onclick="sortBy('colL')" id="thColL">Client/Company</th>
+          <th style="width:210px;" data-col="desc"      onclick="sortBy('desc')">Description</th>
+          <th style="width:82px;"  data-col="line"      onclick="sortBy('line')">Line</th>
+          <th style="width:110px;" data-col="operator"  onclick="sortBy('operator')">Operator</th>
+          <th style="width:100px;" data-col="type"      onclick="sortBy('type')">Transport</th>
+          <th style="width:100px;" data-col="weight"    onclick="sortBy('weight')">Weight (kg)</th>
+          <th style="width:80px;"  data-col="priority"  onclick="sortBy('priority')">Priority</th>
+          <th style="width:96px;"  data-col="status"    onclick="sortBy('status')">Status</th>
+          <th style="width:84px;"  data-col="due"       onclick="sortBy('due')">Due date</th>
+          <th style="width:110px;" data-col="countdown" onclick="sortBy('countdown')">Countdown</th>
+          <th style="width:86px;"  data-col="raised"    onclick="sortBy('raised')">Raised</th>
+        </tr></thead>
+        <tbody id="jbd"></tbody>
+      </table>
     </div>
     <div class="tf" id="jtf">No data loaded</div>
   </div>
-
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ── state ─────────────────────────────────────────────────────
-let JOBS=[], sortCol='id', sortDir=1;
-let colLHeader='Client/Company';
-let fileHandle=null, autoTm=null, cdTm=null, nextT=0, interval=60, lastMod=null;
-const hasAPI=typeof window.showOpenFilePicker==='function';
+// ─────────────────────────────────────────────
+// CONFIG — update GITHUB_CSV_URL if repo changes
+// ─────────────────────────────────────────────
+const GITHUB_CSV_URL = 'https://raw.githubusercontent.com/MoonDropStar/corten-job-dashboard/main/data/JobStatusExport.csv';
 
-// ── IndexedDB ─────────────────────────────────────────────────
-async function dbOpen(){return new Promise((res,rej)=>{const r=indexedDB.open('MfgDash',1);r.onupgradeneeded=e=>e.target.result.createObjectStore('s');r.onsuccess=e=>res(e.target.result);r.onerror=rej;});}
-async function dbSet(k,v){const db=await dbOpen();return new Promise((res,rej)=>{const tx=db.transaction('s','readwrite');tx.objectStore('s').put(v,k);tx.oncomplete=res;tx.onerror=rej;});}
-async function dbGet(k){try{const db=await dbOpen();return new Promise((res,rej)=>{const tx=db.transaction('s','readonly');const rq=tx.objectStore('s').get(k);rq.onsuccess=e=>res(e.target.result);rq.onerror=rej;});}catch{return null;}}
-async function dbDel(k){try{const db=await dbOpen();return new Promise((res,rej)=>{const tx=db.transaction('s','readwrite');tx.objectStore('s').delete(k);tx.oncomplete=res;tx.onerror=rej;});}catch{}}
+// ── State ─────────────────────────────────────
+let JOBS = [], sortCol = 'id', sortDir = 1;
+let refreshMs = 60000;
+let refreshTimer = null, countdownTimer = null, nextAt = 0;
 
-// ── file picking ──────────────────────────────────────────────
-async function pickFile(){
-  if(!hasAPI){document.getElementById('compatWarn').style.display='block';return;}
-  try{
-    const [h]=await window.showOpenFilePicker({types:[{description:'CSV',accept:{'text/csv':['.csv']}}],multiple:false});
-    fileHandle=h;await dbSet('fh',h);await readHandle(true);
-  }catch(e){if(e.name!=='AbortError')showErr('Could not open file: '+e.message);}
+// ── Screen switcher ───────────────────────────
+function showScreen(id) {
+  document.getElementById('loadingScreen').style.display = id === 'loadingScreen' ? 'flex'  : 'none';
+  document.getElementById('errorPanel')   .style.display = id === 'errorPanel'    ? 'flex'  : 'none';
+  document.getElementById('dashboard')    .style.display = id === 'dashboard'     ? 'block' : 'none';
 }
 
-async function readHandle(first){
-  if(!fileHandle)return false;
-  try{
-    const perm=await fileHandle.queryPermission({mode:'read'});
-    if(perm!=='granted'){
-      const req=await fileHandle.requestPermission({mode:'read'});
-      if(req!=='granted'){setPill('idle','Permission needed — click Refresh now');return false;}
+// ── CSV loader ────────────────────────────────
+async function loadGitHubCSV(background) {
+  if (!background) {
+    showScreen('loadingScreen');
+    document.getElementById('loadingMsg').textContent = 'Fetching latest job data…';
+  }
+  try {
+    const res = await fetch(GITHUB_CSV_URL + '?nocache=' + Date.now());
+    if (!res.ok) throw new Error(
+      'GitHub returned HTTP ' + res.status + '. ' +
+      'Make sure the repo is public and data/JobStatusExport.csv exists.'
+    );
+    const text = await res.text();
+    const jobs = parseCSV(text);
+    if (!jobs.length) throw new Error(
+      'CSV loaded but contained no jobs. ' +
+      'Make sure the VBA macro has exported at least once.'
+    );
+    JOBS = jobs;
+    const now = new Date();
+    document.getElementById('dhMeta').textContent =
+      'Live GitHub CSV  ·  Refreshed: ' +
+      now.toLocaleDateString('en-GB', {day:'numeric', month:'short'}) +
+      ' at ' + now.toLocaleTimeString('en-GB', {hour:'2-digit', minute:'2-digit'});
+    if (background) {
+      populateFilters(); render();
+      toast('Refreshed — ' + jobs.length + ' jobs');
+      setPill('live', 'Live — refreshes every ' + (refreshMs/1000) + 's');
+    } else {
+      showScreen('dashboard');
+      populateFilters(); render();
+      startCountdown();
+      setPill('live', 'Live — refreshes every ' + (refreshMs/1000) + 's');
     }
-    const file=await fileHandle.getFile();
-    if(!first&&file.lastModified===lastMod)return true;
-    lastMod=file.lastModified;
-    const text=await file.text();
-    const jobs=parseCSV(text);
-    if(!jobs.length)throw new Error('No jobs found — check column names in VBA config.');
-    JOBS=jobs;
-    const dt=new Date(file.lastModified);
-    document.getElementById('dhMeta').textContent=`Source: ${file.name}  ·  File updated: ${dt.toLocaleDateString('en-GB',{day:'numeric',month:'short'})} at ${dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})}`;
-    if(!first){toast(`Auto-refreshed — ${jobs.length} jobs`);updateDash();}
-    else showDash();
-    setPill('live','Live — auto-watching');
-    return true;
-  }catch(e){setPill('idle','Error: '+e.message.substring(0,50));return false;}
+  } catch (err) {
+    console.error(err);
+    if (background) {
+      setPill('idle', 'Refresh failed — showing last data');
+      toast('Refresh failed: ' + err.message.substring(0, 60));
+    } else {
+      document.getElementById('epErrMsg').textContent = err.message;
+      showScreen('errorPanel');
+    }
+  }
 }
 
-function loadFallback(file){
-  if(!file)return;
-  const r=new FileReader();
-  r.onload=e=>{
-    try{
-      const jobs=parseCSV(e.target.result);
-      if(!jobs.length)throw new Error('No jobs found — check column names in VBA config.');
-      JOBS=jobs;
-      document.getElementById('dhMeta').textContent=`Source: ${file.name}  ·  Loaded manually (use Chrome/Edge for auto-refresh)`;
-      showDash();setPill('idle','Manual mode — no auto-refresh');
-    }catch(ex){showErr('Error: '+ex.message);}
+async function retryGitHub()  { await loadGitHubCSV(false); }
+async function manualRefresh(){ await loadGitHubCSV(true); nextAt = Date.now() + refreshMs; }
+
+// ── Auto-refresh ──────────────────────────────
+function startCountdown() {
+  clearInterval(refreshTimer); clearInterval(countdownTimer);
+  if (refreshMs === 0) { document.getElementById('cdown').textContent = ''; return; }
+  nextAt = Date.now() + refreshMs;
+  refreshTimer   = setInterval(() => { loadGitHubCSV(true); nextAt = Date.now() + refreshMs; }, refreshMs);
+  countdownTimer = setInterval(() => {
+    const s = Math.max(0, Math.round((nextAt - Date.now()) / 1000));
+    document.getElementById('cdown').textContent = 'Next refresh in ' + s + 's';
+  }, 1000);
+}
+function setRate(v) { refreshMs = parseInt(v) * 1000; startCountdown(); }
+
+// ── Manual fallback (drag & drop / file pick) ─
+function loadFallback(file) {
+  if (!file) return;
+  const r = new FileReader();
+  r.onload = e => {
+    try {
+      const jobs = parseCSV(e.target.result);
+      if (!jobs.length) throw new Error('No jobs found in file');
+      JOBS = jobs;
+      document.getElementById('dhMeta').textContent = 'Manual: ' + file.name;
+      showScreen('dashboard');
+      populateFilters(); render();
+      setPill('idle', 'Manual mode — no auto-refresh');
+    } catch (ex) { document.getElementById('epErrMsg').textContent = ex.message; }
   };
   r.readAsText(file);
 }
+document.addEventListener('dragover', e => e.preventDefault());
+document.addEventListener('drop', e => {
+  e.preventDefault();
+  const f = e.dataTransfer.files[0];
+  if (f && f.name.endsWith('.csv')) loadFallback(f);
+});
 
-// ── Drag & Drop ───────────────────────────────────────────────
-(function(){
-  const zone=()=>document.getElementById('dropZone');
-  document.addEventListener('dragover',e=>{e.preventDefault();const z=zone();if(z)z.classList.add('drag-over');});
-  document.addEventListener('dragleave',e=>{if(!e.relatedTarget||!document.contains(e.relatedTarget)){const z=zone();if(z)z.classList.remove('drag-over');}});
-  document.addEventListener('drop',async e=>{
-    e.preventDefault();
-    const z=zone();if(z)z.classList.remove('drag-over');
-    const items=[...e.dataTransfer.items];
-    const csvItem=items.find(i=>i.kind==='file'&&(i.type==='text/csv'||e.dataTransfer.files[0]?.name.endsWith('.csv')));
-    if(!csvItem){toast('Please drop a .csv file');return;}
-    if(csvItem.getAsFileSystemHandle){
-      try{
-        const handle=await csvItem.getAsFileSystemHandle();
-        if(handle&&handle.kind==='file'){
-          fileHandle=handle;
-          await dbSet('fh',handle);
-          await readHandle(true);
-          return;
-        }
-      }catch(e){/* fall through to manual */}
-    }
-    const file=csvItem.getAsFile();
-    if(file)loadFallback(file);
-    else toast('Please drop a .csv file');
+// ── CSV parser (handles quoted fields) ────────
+function parseCSV(raw) {
+  const lines = raw.trim().split(/\r?\n/);
+  if (lines.length < 2) throw new Error('File is empty');
+  const hdrs = parseRow(lines[0]);
+  const idx  = n => hdrs.findIndex(h => h.toLowerCase() === n.toLowerCase());
+  const jobs = [];
+  for (let i = 1; i < lines.length; i++) {
+    if (!lines[i].trim()) continue;
+    const c = parseRow(lines[i]);
+    const g = n => (c[idx(n)] || '').trim();
+    jobs.push({
+      id:       g('job id'),        desc:     g('description'),
+      line:     g('line'),          operator: g('operator'),
+      priority: g('priority'),      status:   g('status'),
+      due:      g('due date'),      raised:   g('date raised'),
+      colL:     (c[9]  || '').trim(),
+      type:     (c[10] || '').trim().toUpperCase(),
+      weight:   (c[11] || '').trim(),
+      countdown: daysLeft(g('due date'))
+    });
+  }
+  return jobs.filter(j => j.id);
+}
+function parseRow(line) {
+  const r = []; let cur = '', inQ = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (ch === '"') { if (inQ && line[i+1] === '"') { cur += '"'; i++; } else inQ = !inQ; }
+    else if (ch === ',' && !inQ) { r.push(cur); cur = ''; }
+    else cur += ch;
+  }
+  r.push(cur); return r;
+}
+
+// ── Helpers ───────────────────────────────────
+function daysLeft(due) {
+  if (!due) return null;
+  const t = new Date(); t.setHours(0,0,0,0);
+  const d = new Date(due); if (isNaN(d)) return null;
+  d.setHours(0,0,0,0);
+  return Math.round((d - t) / 86400000);
+}
+function cdBadge(n) {
+  if (n === null)  return `<span class="cd-badge cd-none">—</span>`;
+  if (n < 0)       return `<span class="cd-badge cd-over">${Math.abs(n)}d overdue</span>`;
+  if (n === 0)     return `<span class="cd-badge cd-due">Due today</span>`;
+  if (n <= 7)      return `<span class="cd-badge cd-warn">${n}d left</span>`;
+  return                  `<span class="cd-badge cd-ok">${n}d left</span>`;
+}
+const fd   = d => { if (!d) return ''; const p = d.split('-'); return p.length===3 ? `${p[2]}/${p[1]}/${p[0].slice(2)}` : d; };
+const scls = s => ({Open:'bs','In Progress':'bw','On Hold':'bg',Completed:'bv',Overdue:'br'}[s]||'bg');
+const pcls = p => ({Critical:'br',High:'bw',Medium:'bs',Low:'bg'}[p]||'bg');
+const tcls = t => ({C:'bt-c',D:'bt-d',TBD:'bt-tbd'}[t]||'bt-tbd');
+const tlbl = t => ({C:'Collection',D:'Delivery',TBD:'To Be Determined'}[t]||t||'—');
+
+// ── Filters & sort ────────────────────────────
+function populateFilters() {
+  [['fpr', JOBS.map(j=>j.priority), 'All priorities'],
+   ['fln', JOBS.map(j=>j.line),     'All lines']].forEach(([id, vals, all]) => {
+    const s = document.getElementById(id), v = s.value;
+    s.innerHTML = `<option value="">${all}</option>`;
+    [...new Set(vals.filter(Boolean))].sort().forEach(x => {
+      const o = document.createElement('option'); o.textContent = x; s.appendChild(o);
+    });
+    s.value = v;
   });
-})();
-
-// ── CSV parser ────────────────────────────────────────────────
-function parseCSV(raw){
-  const lines=raw.trim().split(/\r?\n/);
-  if(lines.length<2)throw new Error('File empty.');
-  const hdrs=parseRow(lines[0]);
-  const idx=n=>hdrs.findIndex(h=>h.toLowerCase()===n.toLowerCase());
-  const jobs=[];
-  for(let i=1;i<lines.length;i++){
-    if(!lines[i].trim())continue;
-    const c=parseRow(lines[i]);
-    const g=n=>(c[idx(n)]||'').trim();
-    jobs.push({id:g('job id'),desc:g('description'),line:g('line'),
-      operator:g('operator'),priority:g('priority'),status:g('status'),
-      due:g('due date'),countdown:daysLeft(g('due date')),
-      raised:g('date raised'),
-      colL:(c[9]||'').trim(),
-      type:(c[10]||'').trim().toUpperCase(),
-      weight:(c[11]||'').trim()});
-  }
-  return jobs.filter(j=>j.id);
 }
-function parseRow(line){
-  const r=[];let cur='',inQ=false;
-  for(let i=0;i<line.length;i++){
-    const ch=line[i];
-    if(ch==='"'){if(inQ&&line[i+1]==='"'){cur+='"';i++;}else inQ=!inQ;}
-    else if(ch===','&&!inQ){r.push(cur);cur='';}
-    else cur+=ch;
-  }
-  r.push(cur);return r;
-}
-
-// ── show / update dashboard ───────────────────────────────────
-function showDash(){
-  document.getElementById('setupPanel').style.display='none';
-  document.getElementById('dashboard').style.display='block';
-  populateFilters();render();
-  if(fileHandle)startAuto();
-}
-function updateDash(){populateFilters();render();}
-
-function populateFilters(){
-  const fill=(id,vals,all)=>{const s=document.getElementById(id);const v=s.value;s.innerHTML=`<option value="">${all}</option>`;[...new Set(vals.filter(Boolean))].sort().forEach(x=>{const o=document.createElement('option');o.textContent=x;s.appendChild(o);});s.value=v;};
-  fill('fpr',JOBS.map(j=>j.priority),'All priorities');
-  fill('fln',JOBS.map(j=>j.line),'All lines');
-}
-
-// ── auto-refresh ──────────────────────────────────────────────
-function startAuto(){
-  clearInterval(autoTm);clearInterval(cdTm);
-  if(interval===0){document.getElementById('cdown').textContent='';return;}
-  nextT=Date.now()+interval*1000;
-  autoTm=setInterval(()=>readHandle(false),interval*1000);
-  cdTm=setInterval(()=>{
-    const s=Math.max(0,Math.round((nextT-Date.now())/1000));
-    document.getElementById('cdown').textContent=interval?`Next refresh in ${s}s`:'';
-    if(s===0)nextT=Date.now()+interval*1000;
-  },1000);
-}
-function setRate(v){interval=parseInt(v);if(fileHandle)startAuto();}
-async function manualRefresh(){
-  if(fileHandle){lastMod=null;await readHandle(false);}
-  else{lastGitHubLoad=0;await loadGitHubCSV();}
-}
-function changeFile(){
-  clearInterval(autoTm);clearInterval(cdTm);
-  fileHandle=null;lastMod=null;dbDel('fh');JOBS=[];
-  document.getElementById('dashboard').style.display='none';
-  document.getElementById('setupPanel').style.display='flex';
-}
-
-// ── status checkbox helpers ───────────────────────────────────
-function getCheckedStatuses(){
-  return [...document.querySelectorAll('.chk-pill input:checked')].map(c=>c.value);
-}
-function setAllStatus(checked){
-  document.querySelectorAll('.chk-pill input').forEach(c=>c.checked=checked);
-  render();
-}
-
-// ── table + KPIs ──────────────────────────────────────────────
-const KPI=[
-  {label:'Total jobs',   key:'total',        col:'#1A2332', sub:'all jobs'},
-  {label:'Open',         key:'Open',         col:'#2563EB', sub:'awaiting start'},
-  {label:'In progress',  key:'In Progress',  col:'#D97706', sub:'currently active'},
-  {label:'On hold',      key:'On Hold',      col:'#94A3B8', sub:'pending action'},
-  {label:'Completed',    key:'Completed',    col:'#16A34A', sub:'this period'},
-  {label:'Overdue',      key:'Overdue',      col:'#DC2626', sub:'requires attention'},
-];
-const scls=s=>({Open:'bs','In Progress':'bw','On Hold':'bg',Completed:'bv',Overdue:'br'}[s]||'bg');
-const pcls=p=>({Critical:'br',High:'bw',Medium:'bs',Low:'bg'}[p]||'bg');
-const tcls=t=>({C:'bt-c',D:'bt-d',TBD:'bt-tbd'}[t]||'bt-tbd');
-const tlbl=t=>({C:'C — Collection',D:'D — Delivery',TBD:'TBD — To Be Determined'}[t]||t||'—');
-const fd=d=>{if(!d)return'';const p=d.split('-');return p.length===3?`${p[2]}/${p[1]}/${p[0].slice(2)}`:d;};
-
-function daysLeft(due){
-  if(!due)return null;
-  const today=new Date();today.setHours(0,0,0,0);
-  const dt=new Date(due);if(isNaN(dt))return null;
-  dt.setHours(0,0,0,0);
-  return Math.round((dt-today)/(1000*60*60*24));
-}
-
-function cdBadge(days){
-  if(days===null)return `<span class="cd-badge cd-none">—</span>`;
-  if(days<0)  return `<span class="cd-badge cd-over">${Math.abs(days)}d overdue</span>`;
-  if(days===0)return `<span class="cd-badge cd-due">Due today</span>`;
-  if(days<=7) return `<span class="cd-badge cd-warn">${days}d left</span>`;
-  return            `<span class="cd-badge cd-ok">${days}d left</span>`;
-}
-
-function getFiltered(){
-  const s=(document.getElementById('fsrc').value||'').toLowerCase();
-  const fp=document.getElementById('fpr').value;
-  const fl=document.getElementById('fln').value;
-  const checked=getCheckedStatuses();
-  return JOBS.filter(j=>
-    (!s||j.id.toLowerCase().includes(s)||j.desc.toLowerCase().includes(s))&&
-    checked.includes(j.status)&&
-    (!fp||j.priority===fp)&&
-    (!fl||j.line===fl)
+function getFiltered() {
+  const s  = (document.getElementById('fsrc').value||'').toLowerCase();
+  const fp = document.getElementById('fpr').value;
+  const fl = document.getElementById('fln').value;
+  const ok = [...document.querySelectorAll('.chk-pill input:checked')].map(c=>c.value);
+  return JOBS.filter(j =>
+    (!s  || j.id.toLowerCase().includes(s) || j.desc.toLowerCase().includes(s)) &&
+    ok.includes(j.status) && (!fp||j.priority===fp) && (!fl||j.line===fl)
   );
 }
-
-function sortBy(col){
-  if(sortCol===col)sortDir*=-1;else{sortCol=col;sortDir=1;}
-  document.querySelectorAll('.jt thead th').forEach(th=>{
-    if(th.id==='thColL')return;
-    th.textContent=th.textContent.replace(/ [↑↓]$/,'');
-    if(th.dataset.col===col)th.textContent+=' '+(sortDir===1?'↑':'↓');
+function sortBy(col) {
+  if (sortCol===col) sortDir*=-1; else { sortCol=col; sortDir=1; }
+  document.querySelectorAll('.jt thead th').forEach(th => {
+    if (th.id==='thColL') return;
+    th.textContent = th.textContent.replace(/ [↑↓]$/,'');
+    if (th.dataset.col===col) th.textContent += ' '+(sortDir===1?'↑':'↓');
   });
   render();
 }
+function setAllStatus(v) { document.querySelectorAll('.chk-pill input').forEach(c=>c.checked=v); render(); }
+function resetFilters()  {
+  document.getElementById('fsrc').value='';
+  document.getElementById('fpr').value='';
+  document.getElementById('fln').value='';
+  setAllStatus(true);
+}
 
-function render(){
-  const jobs=getFiltered().sort((a,b)=>{
-    const av=a[sortCol],bv=b[sortCol];
-    if(sortCol==='countdown'){
-      if(av===null&&bv===null)return 0;
-      if(av===null)return 1;
-      if(bv===null)return -1;
-      return(av-bv)*sortDir;
+// ── Render ────────────────────────────────────
+const KPI=[
+  {label:'Total jobs',  key:'total',       col:'#1A2332',sub:'all jobs'},
+  {label:'Open',        key:'Open',        col:'#2563EB',sub:'awaiting start'},
+  {label:'In progress', key:'In Progress', col:'#D97706',sub:'currently active'},
+  {label:'On hold',     key:'On Hold',     col:'#94A3B8',sub:'pending action'},
+  {label:'Completed',   key:'Completed',   col:'#16A34A',sub:'this period'},
+  {label:'Overdue',     key:'Overdue',     col:'#DC2626',sub:'requires attention'},
+];
+function render() {
+  const jobs = getFiltered().sort((a,b) => {
+    const av=a[sortCol], bv=b[sortCol];
+    if (sortCol==='countdown') {
+      if (av===null&&bv===null) return 0;
+      if (av===null) return 1; if (bv===null) return -1;
+      return (av-bv)*sortDir;
     }
-    return(typeof av==='number'?av-bv:String(av||'').localeCompare(String(bv||'')))*sortDir;
+    return (typeof av==='number'?av-bv:String(av||'').localeCompare(String(bv||'')))*sortDir;
   });
-  const cnt={total:JOBS.length};
+  const cnt = {total:JOBS.length};
   ['Open','In Progress','On Hold','Completed','Overdue'].forEach(s=>cnt[s]=JOBS.filter(j=>j.status===s).length);
-  document.getElementById('kpr').innerHTML=KPI.map(k=>
+  document.getElementById('kpr').innerHTML = KPI.map(k=>
     `<div class="kc"><div class="kl">${k.label}</div><div class="kv" style="color:${k.col}">${cnt[k.key]??0}</div><div class="kd">${k.sub}</div></div>`
   ).join('');
-
-  document.getElementById('thColL').textContent=colLHeader+(sortCol==='colL'?' '+(sortDir===1?'↑':'↓'):'');
-
-  document.getElementById('jbd').innerHTML=jobs.map(j=>`<tr>
+  document.getElementById('thColL').textContent = 'Client/Company'+(sortCol==='colL'?' '+(sortDir===1?'↑':'↓'):'');
+  document.getElementById('jbd').innerHTML = jobs.map(j=>`<tr>
     <td class="mono">${j.id}</td>
     <td style="color:#64748B;" title="${j.colL}">${j.colL||'—'}</td>
     <td title="${j.desc}" style="color:#1A2332;">${j.desc}</td>
@@ -496,103 +443,18 @@ function render(){
     <td>${cdBadge(j.countdown)}</td>
     <td style="color:#64748B;">${fd(j.raised)}</td>
   </tr>`).join('');
-
-  const hiddenCount=JOBS.length-jobs.length;
-  document.getElementById('jtf').textContent=
-    `Showing ${jobs.length} of ${JOBS.length} jobs`+
-    (hiddenCount>0?` — ${hiddenCount} hidden by filters`:'');
+  const hidden = JOBS.length-jobs.length;
+  document.getElementById('jtf').textContent =
+    `Showing ${jobs.length} of ${JOBS.length} jobs`+(hidden>0?` — ${hidden} hidden by filters`:'');
 }
 
-function resetFilters(){
-  document.getElementById('fsrc').value='';
-  document.getElementById('fpr').value='';
-  document.getElementById('fln').value='';
-  setAllStatus(true);
-}
-
-// ── helpers ───────────────────────────────────────────────────
+// ── Toast ─────────────────────────────────────
 function setPill(type,text){const p=document.getElementById('pill');p.className='pill '+type;p.textContent=text;}
 let ttm;
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(ttm);ttm=setTimeout(()=>t.classList.remove('show'),3000);}
-function showErr(msg){const e=document.getElementById('setupError');e.textContent=msg;e.style.display='block';setTimeout(()=>e.style.display='none',6000);}
 
-// ── GitHub CSV Auto Loader ────────────────────────────────────
-// Fetches directly from raw.githubusercontent.com to bypass
-// GitHub Pages CDN cache — always gets the latest uploaded CSV.
-const GITHUB_CSV_URL = 'https://raw.githubusercontent.com/MoonDropStar/corten-job-dashboard/main/data/JobStatusExport.csv';
-
-function showLoading(msg){
-  document.getElementById('loadingScreen').style.display='flex';
-  document.getElementById('setupPanel').style.display='none';
-  document.getElementById('dashboard').style.display='none';
-  if(msg) document.getElementById('loadingMsg').textContent=msg;
-}
-
-function showFallback(errMsg){
-  document.getElementById('loadingScreen').style.display='none';
-  document.getElementById('dashboard').style.display='none';
-  const sp=document.getElementById('setupPanel');
-  sp.style.display='flex';
-  document.getElementById('setupErrDetail').textContent=errMsg;
-}
-
-async function retryGitHub(){
-  showLoading('Retrying GitHub connection…');
-  await loadGitHubCSV();
-}
-
-async function loadGitHubCSV(){
-  try{
-    document.getElementById('loadingMsg').textContent='Fetching latest job data…';
-
-    const response = await fetch(GITHUB_CSV_URL + '?t=' + Date.now());
-    if(!response.ok) throw new Error('GitHub returned HTTP ' + response.status);
-
-    const text = await response.text();
-    const jobs = parseCSV(text);
-    if(!jobs.length) throw new Error('CSV loaded but no jobs found — check VBA export ran correctly');
-
-    JOBS = jobs;
-
-    const now = new Date();
-    document.getElementById('dhMeta').textContent =
-      'Live GitHub CSV  ·  Last refreshed: ' +
-      now.toLocaleDateString('en-GB',{day:'numeric',month:'short'}) + ' at ' +
-      now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
-
-    const dashVisible = document.getElementById('dashboard').style.display !== 'none';
-
-    if(!dashVisible){
-      // First load — hide loading screen and show dashboard
-      document.getElementById('loadingScreen').style.display='none';
-      showDash();
-    } else {
-      // Subsequent refresh — just update data in place
-      updateDash();
-      toast('Refreshed — ' + jobs.length + ' jobs loaded');
-    }
-
-    setPill('live','Live — auto-refresh every 60s');
-
-  }catch(err){
-    console.error('GitHub CSV load error:', err);
-    const dashVisible = document.getElementById('dashboard').style.display !== 'none';
-    if(!dashVisible){
-      // Failed on initial load — show fallback panel
-      showFallback(err.message);
-    } else {
-      // Failed on background refresh — show toast, keep existing data
-      setPill('idle','Refresh failed — showing last loaded data');
-      toast('Auto-refresh failed: ' + err.message.substring(0,50));
-    }
-  }
-}
-
-// ── GitHub auto-refresh timer ─────────────────────────────────
-setInterval(loadGitHubCSV, 60000);
-
-// ── Startup — load from GitHub immediately ────────────────────
-loadGitHubCSV();
+// ── START — auto-load on page open ────────────
+loadGitHubCSV(false);
 </script>
 </body>
 </html>

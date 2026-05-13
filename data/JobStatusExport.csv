@@ -1,24 +1,25 @@
-Job ID,Description,Line,Operator,Priority,Status,Due Date,Progress%,Date Raised,Client/Company,Transport,Weight (kg)
-21659,COR-WAV,Programming 30,Robert M.,Medium,Completed,12/05/2026,0,28/04/2026,Webcox Engineering Ltd,D,1980.00
-21659,COR-WAV,Jig & Fixture 270,George D.,Medium,Completed,12/05/2026,0,28/04/2026,Webcox Engineering Ltd,D,1980.00
-21659,COR-WAV,Steel Rolls 100,Hugh M.,Medium,Completed,12/05/2026,0,28/04/2026,Webcox Engineering Ltd,D,1980.00
-21659,COR-WAV,Guillotine 20,Hugh M.,Medium,Completed,12/05/2026,0,28/04/2026,Webcox Engineering Ltd,D,1980.00
-21659,COR-WAV,Inspection 290,Hugh M.,Medium,Completed,12/05/2026,0,28/04/2026,Webcox Engineering Ltd,D,1980.00
-21659,COR-WAV,Picking Material 120,George D.,Medium,Completed,12/05/2026,0,28/04/2026,Webcox Engineering Ltd,D,1980.00
-21659,COR-WAV,Wrapping 310,George D.,Medium,Completed,12/05/2026,0,28/04/2026,Webcox Engineering Ltd,D,1980.00
-21659,COR-WAV,WIP,JGB,Medium,Completed,12/05/2026,0,28/04/2026,Webcox Engineering Ltd,D,1980.00
-21678,COR-WAV,WIP,JGB,,In Progress,21/05/2026,0,12/05/2026,Richard Medway,TBD,29.71
-21678,COR-WAV,Programming 30,Robert M.,,Completed,21/05/2026,0,12/05/2026,Richard Medway,TBD,29.71
-21678,COR-WAV,Steel Rolls 100,,,On Hold,21/05/2026,0,12/05/2026,Richard Medway,TBD,29.71
-21678,COR-WAV,Guillotine 20,,,On Hold,21/05/2026,0,12/05/2026,Richard Medway,TBD,29.71
-21678,COR-WAV,Trumpf Laser 330,,,On Hold,21/05/2026,0,12/05/2026,Richard Medway,TBD,29.71
-21678,COR-WAV,Press Brake 140,,,On Hold,21/05/2026,0,12/05/2026,Richard Medway,TBD,29.71
-21678,COR-WAV,Weld Complete 210,,,On Hold,21/05/2026,0,12/05/2026,Richard Medway,TBD,29.71
-21678,COR-WAV,Picking Material 120,,,On Hold,21/05/2026,0,12/05/2026,Richard Medway,TBD,29.71
-21678,COR-WAV,Delivery 300,,,On Hold,21/05/2026,0,12/05/2026,Richard Medway,TBD,29.71
-21683,COR-WAV,WIP,JGB,,In Progress,19/05/2026,0,12/05/2026,,TBD,20.74
-21683,COR-WAV,Programming 30,Robert M.,,Completed,19/05/2026,0,12/05/2026,,TBD,20.74
-21683,COR-WAV,Steel Rolls 100,,,On Hold,19/05/2026,0,12/05/2026,,TBD,20.74
-21683,COR-WAV,Picking Material 120,,,On Hold,19/05/2026,0,12/05/2026,,TBD,20.74
-21683,COR-WAV,Inspection 290,,,On Hold,19/05/2026,0,12/05/2026,,TBD,20.74
-21683,COR-WAV,Delivery 300,,,On Hold,19/05/2026,0,12/05/2026,,TBD,20.74
+"Job ID","Description","Line","Operator","Priority","Status","Due Date","Progress%","Date Raised","Client/Company","Transport","Weight (kg)"
+"21659","COR-WAV","Programming 30","Robert M.","Medium","Completed","2026-05-12","0","2026-04-28","Webcox Engineering Ltd","D","1980"
+"21659","COR-WAV","Jig & Fixture 270","George D.","Medium","Completed","2026-05-12","0","2026-04-28","Webcox Engineering Ltd","D","1980"
+"21659","COR-WAV","Steel Rolls 100","Hugh M.","Medium","Completed","2026-05-12","0","2026-04-28","Webcox Engineering Ltd","D","1980"
+"21659","COR-WAV","Guillotine 20","Hugh M.","Medium","Completed","2026-05-12","0","2026-04-28","Webcox Engineering Ltd","D","1980"
+"21659","COR-WAV","Inspection 290","Hugh M.","Medium","Completed","2026-05-12","0","2026-04-28","Webcox Engineering Ltd","D","1980"
+"21659","COR-WAV","Picking Material 120","George D.","Medium","Completed","2026-05-12","0","2026-04-28","Webcox Engineering Ltd","D","1980"
+"21659","COR-WAV","Wrapping 310","George D.","Medium","Completed","2026-05-12","0","2026-04-28","Webcox Engineering Ltd","D","1980"
+"21659","COR-WAV","WIP","JGB","Medium","Completed","2026-05-12","0","2026-04-28","Webcox Engineering Ltd","D","1980"
+"21678","COR-WAV","WIP","JGB","","In Progress","2026-05-21","0","2026-05-12","Richard Medway","TBD","29.7087175"
+"21678","COR-WAV","Programming 30","Robert M.","","Completed","2026-05-21","0","2026-05-12","Richard Medway","TBD","29.7087175"
+"21678","COR-WAV","Steel Rolls 100","","","On Hold","2026-05-21","0","2026-05-12","Richard Medway","TBD","29.7087175"
+"21678","COR-WAV","Guillotine 20","","","On Hold","2026-05-21","0","2026-05-12","Richard Medway","TBD","29.7087175"
+"21678","COR-WAV","Trumpf Laser 330","","","On Hold","2026-05-21","0","2026-05-12","Richard Medway","TBD","29.7087175"
+"21678","COR-WAV","Press Brake 140","","","On Hold","2026-05-21","0","2026-05-12","Richard Medway","TBD","29.7087175"
+"21678","COR-WAV","Weld Complete 210","","","On Hold","2026-05-21","0","2026-05-12","Richard Medway","TBD","29.7087175"
+"21678","COR-WAV","Picking Material 120","","","On Hold","2026-05-21","0","2026-05-12","Richard Medway","TBD","29.7087175"
+"21678","COR-WAV","Delivery 300","","","On Hold","2026-05-21","0","2026-05-12","Richard Medway","TBD","29.7087175"
+"21683","COR-WAV","WIP","JGB","","In Progress","2026-05-19","0","2026-05-12","","TBD","20.73813"
+"21683","COR-WAV","Programming 30","Robert M.","","Completed","2026-05-19","0","2026-05-12","","TBD","20.73813"
+"21683","COR-WAV","Steel Rolls 100","","","On Hold","2026-05-19","0","2026-05-12","","TBD","20.73813"
+"21683","COR-WAV","Picking Material 120","","","On Hold","2026-05-19","0","2026-05-12","","TBD","20.73813"
+"21683","COR-WAV","Inspection 290","","","On Hold","2026-05-19","0","2026-05-12","","TBD","20.73813"
+"21683","COR-WAV","Delivery 300","","","On Hold","2026-05-19","0","2026-05-12","","TBD","20.73813"
+"123456","BESPOKE ITEM","WIP","JGB","Low","In Progress","","0","2026-05-13","Anas Nazrie","C",""
